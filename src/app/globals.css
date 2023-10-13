@@ -38,6 +38,21 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+
+  --background-color-light: #F9F9F9;
+  --text-primary-light: #333333;
+  --text-secondary-light: #666666;
+  --buttons-links-light: #007BFF;
+  --buttons-links-hover-light: #0056b3;
+  --cta-highlight-light: #FF5722;
+
+  --background-color-dark: #121212;
+  --text-primary-dark: #FFFFFF;
+  --text-secondary-dark: #CCCCCC;
+  --buttons-links-dark: #007BFF;
+  --buttons-links-hover-dark: #0056b3;
+  --cta-highlight-dark: #FF5722;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -100,6 +115,9 @@ a {
   text-decoration: none;
 }
 
+section {
+  height: 90vh;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
