@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📱 App Portfólio Customizável
 
-## Getting Started
+Este é o repositório oficial do **App Portfólio Customizável**, um aplicativo web responsivo desenvolvido com **NextJS**, **React** e **Firebase**, com o objetivo de facilitar o gerenciamento e compartilhamento de portfólios, um projeto pessoal.
 
-First, run the development server:
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- **[NextJS](https://nextjs.org/)**
+- **React**
+- **TypeScript**
+- **Firebase (Authentication, Firestore Database, Storage)**
+
+---
+
+## 🔧 Funcionalidades do App
+
+- Cadastro e gerenciamento de portfólio (CRUD & Estilização)
+- Compartilhamento de página de portfólio7
+- Autenticação de usuários
+
+---
+
+## 📦 Pré-requisitos
+
+Antes de começar, você precisará ter instalado em sua máquina:
+
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+
+---
+
+## 🛠️ Como rodar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/fllaviacorreia/portfolio.git
+cd portfolio
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+# ou
+yarn add
+# ou
+bun i
+```
+
+### 3. Configure o Firebase
+
+Crie um arquivo `.env` na raiz do projeto com suas credenciais do Firebase:
+
+```
+FIREBASE_API_KEY=...
+FIREBASE_AUTH_DOMAIN=...
+FIREBASE_PROJECT_ID=...
+FIREBASE_STORAGE_BUCKET=...
+FIREBASE_MESSAGING_SENDER_ID=...
+FIREBASE_APP_ID=...
+```
+
+Certifique-se de que o projeto já está configurado no Firebase com:
+- Authentication habilitada (Email/Password)
+- Firestore Database
+- Storage
+
+### 4. Inicie o projeto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Prototipação
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O design e a prototipação do aplicativo foram feitos no Figma. Você pode visualizar o Design System e os protótipos através do link abaixo:
 
-## Learn More
+👉 [Acessar protótipo no Figma](https://www.figma.com/community/file/1595473479756214994)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Estrutura do Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+📁 src/
+├── app/
+├── components/
+├── context/
+├── firebase/
+├── hooks/
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👩‍💻 Contribuindo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto é de cunho pessoal, porém colaborativo. Pull requests são bem-vindos!
+
+---
+
+## 🧑‍💻 Desenvolvido por
+
+**Flávia Correia**  
+[LinkedIn](https://www.linkedin.com/in/fllaviacorreia)
+
+---
+
+## 📃 Licença
+
+Este projeto está licenciado sob a licença MIT.
