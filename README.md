@@ -88,7 +88,7 @@ O design e a prototipação do aplicativo foram feitos no Figma. Você pode visu
 📁 src/
 ├── app/
 ├── components/
-├── context/
+├── contexts/
 ├── firebase/
 ├── hooks/
 ```

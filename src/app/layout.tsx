@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+
 
 export const metadata: Metadata = {
   title: "My Portfolio",
@@ -31,56 +34,56 @@ export default function RootLayout({
           <ul>
             <li> Public Routes</li>
             <li>
-              <a href="/">Home Root</a>
+              <Link href="/" className="">Home Root</Link>
             </li>
             <li>
-              <a href="/0000/home">Home</a>
+              <Link href="/0000/home">Home</Link>
             </li>
             <li>
-              <a href="/0000/projects">Projects</a>
+              <Link href="/0000/projects">Projects</Link>
             </li>
             <li>
-              <a href="/0000/education">Education</a>
+              <Link href="/0000/education">Education</Link>
             </li>
             <li>
-              <a href="/0000/tools">Tools</a>
+              <Link href="/0000/tools">Tools</Link>
             </li>
             <li>
-              <a href="/0000/xps">XPS</a>
+              <Link href="/0000/xps">XPS</Link>
             </li>
             <li>
-              <a href="/0000/contact">Contact</a>
+              <Link href="/0000/contact">Contact</Link>
             </li>
             <li>
-              <a href="/not-found">Not Found</a>
+              <Link href="/not-found">Not Found</Link>
             </li>
             <li>
-              <a href="/auth/forgot-password">Forgot Password</a>
+              <Link href="/auth/forgot-password">Forgot Password</Link>
             </li>
             <li>
-              <a href="/auth/access">Access</a>
+              <Link href="/auth/access">Access</Link>
             </li>
             <li> Private Routes</li>
             <li>
-              <a href="/dashboard">Dashboard</a>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <a href="/home">Home</a>
+              <Link href="/home">Home</Link>
             </li>
             <li>
-              <a href="/projects">Projects</a>
+              <Link href="/projects">Projects</Link>
             </li>
             <li>
-              <a href="/education">Education</a>
+              <Link href="/education">Education</Link>
             </li>
             <li>
-              <a href="/tools">Tools</a>
+              <Link href="/tools">Tools</Link>
             </li>
             <li>
-              <a href="/xps">XPS</a>
+              <Link href="/xps">XPS</Link>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <Link href="/contact">Contact</Link>
             </li>
           </ul>
           {children}
