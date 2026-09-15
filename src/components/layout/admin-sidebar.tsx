@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { LogoutButton } from "@/components/auth/logout-button";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -100,7 +101,11 @@ export function AdminSidebar() {
           })}
         </nav>
 
-        <div className="mt-auto hidden items-center justify-between border-t border-border pt-4 lg:flex">
+        <div className="mt-auto border-t border-border pt-4">
+          <LogoutButton />
+        </div>
+
+        <div className="mt-3 hidden items-center justify-between lg:flex">
           <span className="text-sm text-muted-foreground">Aparência</span>
           <ThemeToggle />
         </div>

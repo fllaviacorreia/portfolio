@@ -1,8 +1,13 @@
 import { AdminSidebar } from "@/components/layout/admin-sidebar";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/services/auth/session-service";
 
 export const dynamic = "force-dynamic";
 
-export default function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const user = await getCurrentUser();
+  if (!user) redirect("/auth/access");
+
   return (
     <div className="min-h-dvh bg-background">
       <a
