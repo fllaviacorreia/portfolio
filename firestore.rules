@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSystemOwner() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/systemRoles/$(request.auth.uid));
+    }
+
+    function ownsPortfolio(portfolioId) {
+      return signedIn()
+        && get(/databases/$(database)/documents/portfolios/$(portfolioId)).data.ownerId
+          == request.auth.uid;
+    }
+
+    function portfolioIsPublished(portfolioId) {
+      return get(/databases/$(database)/documents/portfolios/$(portfolioId)).data.status
+        == 'published';
+    }
+
+    match /users/{userId} {
+      allow read, update, delete: if request.auth.uid == userId || isSystemOwner();
+      allow create: if request.auth.uid == userId;
+    }
+
+    match /systemRoles/{userId} {
+      allow read: if request.auth.uid == userId || isSystemOwner();
+      allow write: if false;
+    }
+
+    match /portfolios/{portfolioId} {
+      allow read: if resource.data.status == 'published'
+        || resource.data.ownerId == request.auth.uid
+        || isSystemOwner();
+      allow create: if signedIn() && request.resource.data.ownerId == request.auth.uid;
+      allow update, delete: if resource.data.ownerId == request.auth.uid
+        || isSystemOwner();
+
+      match /contacts/{contactId} {
+        allow create: if request.resource.data.keys().hasOnly([
+          'name', 'email', 'phone', 'subject', 'message', 'status', 'receivedAt'
+        ])
+          && request.resource.data.name is string
+          && request.resource.data.name.size() >= 2
+          && request.resource.data.name.size() <= 120
+          && request.resource.data.email is string
+          && request.resource.data.message is string
+          && request.resource.data.message.size() >= 10
+          && request.resource.data.message.size() <= 5000
+          && request.resource.data.status == 'new';
+        allow read, update, delete: if ownsPortfolio(portfolioId) || isSystemOwner();
+      }
+
+      match /{document=**} {
+        allow read: if portfolioIsPublished(portfolioId)
+          || ownsPortfolio(portfolioId)
+          || isSystemOwner();
+        allow write: if ownsPortfolio(portfolioId) || isSystemOwner();
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
