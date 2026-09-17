@@ -13,6 +13,7 @@ export interface PortfolioRepository {
   findByCode(code: string): Promise<Portfolio | null>;
   findByOwnerId(ownerId: string): Promise<Portfolio | null>;
   create(portfolio: Portfolio): Promise<void>;
+  getHome(portfolioId: string): Promise<HomeContent | null>;
   saveHome(portfolioId: string, content: HomeContent): Promise<void>;
   listExperiences(portfolioId: string): Promise<Experience[]>;
   listProjects(portfolioId: string): Promise<Project[]>;

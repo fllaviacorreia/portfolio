@@ -44,6 +44,25 @@ export const homeContentSchema = z.object({
   heroImage: mediaReferenceSchema.nullable(),
 });
 
+export const homeFormSchema = z.object({
+  eyebrow: z.string().trim().max(120),
+  title: requiredText,
+  subtitle: z.string().trim().max(320),
+  description: z.string().trim().max(2000),
+  primaryActionLabel: requiredText,
+  primaryActionHref: z.string().trim().min(1).max(2048),
+  secondaryActionLabel: z.string().trim().max(240),
+  secondaryActionHref: z.string().trim().max(2048),
+  linkedinUrl: z.union([z.literal(""), z.url().max(2048)]),
+  githubUrl: z.union([z.literal(""), z.url().max(2048)]),
+}).refine(
+  (value) => Boolean(value.secondaryActionLabel) === Boolean(value.secondaryActionHref),
+  {
+    message: "Informe o texto e o destino do botão secundário.",
+    path: ["secondaryActionHref"],
+  },
+);
+
 export const experienceSchema = z.object({
   id: z.string().min(1),
   company: requiredText,
