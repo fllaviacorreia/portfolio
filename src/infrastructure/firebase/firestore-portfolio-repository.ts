@@ -42,6 +42,12 @@ export class FirestorePortfolioRepository implements PortfolioRepository {
     await this.database.collection("portfolios").doc(id).create(data);
   }
 
+  async getHome(portfolioId: string): Promise<HomeContent | null> {
+    const snapshot = await this.database.collection("portfolios").doc(portfolioId)
+      .collection("sections").doc("home").get();
+    return snapshot.exists ? (snapshot.data() as HomeContent) : null;
+  }
+
   async saveHome(portfolioId: string, content: HomeContent): Promise<void> {
     await this.database.collection("portfolios").doc(portfolioId)
       .collection("sections").doc("home").set(content, { merge: true });
