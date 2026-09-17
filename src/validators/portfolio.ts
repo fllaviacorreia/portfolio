@@ -103,6 +103,39 @@ export const projectSchema = z.object({
   order: z.number().int().nonnegative(),
 });
 
+export const projectFormSchema = z.object({
+  projectId: z.string().trim().optional(),
+  title: requiredText,
+  slug: z.string().trim().regex(/^[a-z0-9-]{3,100}$/, "Use letras minúsculas, números e hífens."),
+  summary: z.string().trim().min(10).max(1000),
+  coverUrl: z.union([z.literal(""), z.url().max(2048)]),
+  coverAlt: z.string().trim().max(240),
+  repositoryUrl: z.union([z.literal(""), z.url().max(2048)]),
+  liveUrl: z.union([z.literal(""), z.url().max(2048)]),
+  technologies: z.string().trim().max(1000),
+  sections: z.string().transform((value, context) => {
+    try {
+      return z.array(z.object({
+        id: z.string().min(1),
+        anchor: z.string().regex(/^[a-z0-9-]{2,100}$/),
+        title: requiredText,
+        kind: z.enum(["richText", "image", "gallery", "warning", "legal"]),
+        content: z.string().max(50000),
+        imageUrls: z.array(z.url().max(2048)).max(30),
+        visible: z.boolean(),
+      })).max(50).parse(JSON.parse(value));
+    } catch {
+      context.addIssue({ code: "custom", message: "As seções do projeto são inválidas." });
+      return z.NEVER;
+    }
+  }),
+  featured: z.enum(["on"]).optional().transform(Boolean),
+  visible: z.enum(["on"]).optional().transform(Boolean),
+}).refine((value) => !value.coverUrl || Boolean(value.coverAlt), {
+  message: "Descreva a imagem de capa para acessibilidade.",
+  path: ["coverAlt"],
+});
+
 export const technologySchema = z.object({
   id: z.string().min(1),
   name: requiredText,

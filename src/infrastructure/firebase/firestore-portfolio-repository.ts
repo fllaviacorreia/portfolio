@@ -61,6 +61,29 @@ export class FirestorePortfolioRepository implements PortfolioRepository {
     return this.listOrdered<Project>(portfolioId, "projects");
   }
 
+  async getProject(portfolioId: string, projectId: string): Promise<Project | null> {
+    const snapshot = await this.database.collection("portfolios").doc(portfolioId)
+      .collection("projects").doc(projectId).get();
+    return snapshot.exists ? ({ id: snapshot.id, ...snapshot.data() } as Project) : null;
+  }
+
+  async getProjectBySlug(portfolioId: string, slug: string): Promise<Project | null> {
+    const snapshot = await this.database.collection("portfolios").doc(portfolioId)
+      .collection("projects").where("slug", "==", slug).limit(1).get();
+    return snapshot.empty ? null : dataWithId<Project>(snapshot.docs[0]);
+  }
+
+  async saveProject(portfolioId: string, project: Project): Promise<void> {
+    const { id, ...data } = project;
+    await this.database.collection("portfolios").doc(portfolioId)
+      .collection("projects").doc(id).set(data);
+  }
+
+  async deleteProject(portfolioId: string, projectId: string): Promise<void> {
+    await this.database.collection("portfolios").doc(portfolioId)
+      .collection("projects").doc(projectId).delete();
+  }
+
   listTechnologies(portfolioId: string): Promise<Technology[]> {
     return this.listOrdered<Technology>(portfolioId, "technologies");
   }

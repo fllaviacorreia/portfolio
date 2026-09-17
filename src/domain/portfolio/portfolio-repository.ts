@@ -17,6 +17,10 @@ export interface PortfolioRepository {
   saveHome(portfolioId: string, content: HomeContent): Promise<void>;
   listExperiences(portfolioId: string): Promise<Experience[]>;
   listProjects(portfolioId: string): Promise<Project[]>;
+  getProject(portfolioId: string, projectId: string): Promise<Project | null>;
+  getProjectBySlug(portfolioId: string, slug: string): Promise<Project | null>;
+  saveProject(portfolioId: string, project: Project): Promise<void>;
+  deleteProject(portfolioId: string, projectId: string): Promise<void>;
   listTechnologies(portfolioId: string): Promise<Technology[]>;
   listEducation(portfolioId: string): Promise<Education[]>;
   listContacts(portfolioId: string): Promise<ContactMessage[]>;
