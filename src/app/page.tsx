@@ -1,16 +1,17 @@
-///import Image from 'next/image'
-import styles from './page.module.css'
-import Link from 'next/link'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import { Button } from "@/components/button";
+import { Metadata } from "next";
 
-export default function Index() {
+export const metadata: Metadata = {
+   title: "Home - My Porftolio",   
+}
+export default function Home() {
   return (
-    <main className={styles.main}>
-      <Header />
-      <Link href='/curriculum'>Ir para currículo</Link>
-      
-      <Footer />
+    <main className="w-full h-dvh p-3 flex flex-col gap-5  justify-center  items-center">
+      <h1> FC Freelas</h1>
+      <div className="flex flex-row  max-w-1/2 justify-between items-baseline   w-full">
+        <Button  size="md">Criar meu portfólio</Button>
+        <Button size="md" variant="outline">Saiba mais</Button>
+      </div>
     </main>
-  )
+  );
 }

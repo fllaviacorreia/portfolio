@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function ownsPortfolio(portfolioId) {
+      return signedIn()
+        && firestore.get(/databases/(default)/documents/portfolios/$(portfolioId)).data.ownerId
+          == request.auth.uid;
+    }
+
+    function validImage() {
+      return request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp|avif)');
+    }
+
+    match /portfolios/{portfolioId}/{allPaths=**} {
+      allow read: if firestore.get(
+        /databases/(default)/documents/portfolios/$(portfolioId)
+      ).data.status == 'published' || ownsPortfolio(portfolioId);
+      allow write: if ownsPortfolio(portfolioId) && validImage();
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
