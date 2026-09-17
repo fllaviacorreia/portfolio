@@ -5,14 +5,14 @@ import type { ComponentProps, CSSProperties } from 'react'
 
 export const textareaVariants = tv({
 	base: [
-		'w-full rounded-3xl border-2 border-transparent bg-theme-800 px-6 py-4 text-foreground placeholder:text-theme-600 transition-colors resize-none',
+		'w-full resize-none rounded-3xl border-2 border-transparent bg-input px-6 py-4 text-foreground placeholder:text-muted-foreground transition-colors',
 		'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
 		'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
 		'data-[error]:border-red-500 data-[error]:focus:ring-red-500',
 	],
 	variants: {
 		variant: {
-			default: 'bg-theme-800 text-foreground placeholder:text-theme-600',
+			default: 'bg-input text-foreground placeholder:text-muted-foreground',
 			custom: [
 				'bg-[var(--textarea-bg)] text-[var(--textarea-text)] placeholder:text-[var(--textarea-placeholder)]',
 			],
